@@ -1,0 +1,101 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title *ngIf='isLoggedIn && event != undefined'>Event: {{event.name}}</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="nav.goBack()">
+        <ion-icon slot="icon-only" name="arrow-round-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="isLoggedIn">
+
+    <ion-button (click)="nav.navigateForwardParameter('viewevent', event)" expand='block' color='secondary'>
+      <ion-icon name='calendar'></ion-icon>Zurück zum Event
+    </ion-button>
+
+    <div *ngIf='tasksTODO !== undefined && tasksFUTURE !== undefined && tasksDONE !== undefined'>
+
+      <div *ngIf='tasksTODO.length > 0 || tasksFUTURE.length > 0 || tasksDONE.length > 0'>
+        <ion-card>
+          <ion-card-header color='light'>
+            <ion-card-title>Dringende Tasks:</ion-card-title>
+            <ion-card-subtitle>Diese Task solltest du möglichst bald erledigen!</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-card-subtitle *ngIf='tasksTODO.length === 0'>---</ion-card-subtitle>
+            <ion-list *ngFor='let task of tasksTODO'>
+              <ion-item (click)="nav.navigateForwardParameter('viewtask', task)" detail *ngIf='!task.done' lines='none'>
+                {{task.name}}
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      
+        <ion-card>
+          <ion-card-header color='light'>
+            <ion-card-title>Offene Tasks:</ion-card-title>
+            <ion-card-subtitle>Diese Tasks kannst du jetzt schon erledigen, sind jedoch noch nicht dringend.</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-card-subtitle *ngIf='tasksFUTURE.length === 0'>---</ion-card-subtitle>
+            <ion-list *ngFor='let task of tasksFUTURE'>
+              <ion-item (click)="nav.navigateForwardParameter('viewtask', task)" detail  lines='none'>
+                {{task.name}}
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+  
+        <ion-card>
+          <ion-card-header color='light'>
+            <ion-card-title>Erledigte Tasks:</ion-card-title>
+            <ion-card-subtitle>Diese Tasks sind bereits erledigt.</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-card-subtitle *ngIf='tasksDONE.length === 0'>---</ion-card-subtitle>
+            <ion-list *ngFor='let task of tasksDONE'>
+              <ion-item (click)="nav.navigateForwardParameter('viewtask', task)" detail  lines='none'>
+                {{task.name}}
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    
+      <div *ngIf='tasksTODO.length === 0 && tasksFUTURE.length === 0 && tasksDONE.length === 0'>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Dieses Event hat noch keine Tasks</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </div>
+    </div>
+
+  </div>
+  
+  
+  <ion-card *ngIf="isNotLoggedIn">
+    <ion-card-header>
+      <ion-card-title>
+        Du bist nicht eingeloggt!
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-button (click)="nav.navigateLogin('tasklist')" expand='block' color='secondary'>
+        <ion-icon name="home"></ion-icon> Zum Login
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-footer *ngIf="isLoggedIn">
+  <ion-toolbar color="secondary">
+    <div (click)="nav.navigateForwardParameter('createtask', filterNavParameter)" color='secondary' text-center>
+      <ion-icon name="checkmark"></ion-icon><ion-icon name="add"></ion-icon>Task erstellen
+    </div>
+  </ion-toolbar>
+</ion-footer>

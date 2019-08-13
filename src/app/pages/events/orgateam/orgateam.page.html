@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title *ngIf='isLoggedIn && event != undefined'>Event: {{event.name}}</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="nav.goBack()">
+        <ion-icon slot="icon-only" name="arrow-round-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="isLoggedIn">
+
+    <ion-button (click)="nav.navigateForwardParameter('viewevent', this.event)" expand='block' color='secondary'>
+      <ion-icon name="calendar"></ion-icon> Zurück zum Event
+    </ion-button>
+
+    <ion-card>
+      <ion-card-header color='light'>
+        <ion-card-title>Orgateam Mitglieder:</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <!--
+          <ion-list *ngFor='let member of orgamembers'>
+            <ion-item><ion-label>{{member.name}}</ion-label></ion-item>
+          </ion-list>
+        -->
+        <ion-label>{{orgateamPrettyPrint()}}</ion-label>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header color='light'>
+        <ion-card-title>Lade weitere Teammitglieder ein:</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <form #form="ngForm" (ngSubmit)="inviteToOrgateam(form)">
+          <ion-item lines='none'>
+            <ion-label>Person:</ion-label>
+            <ion-select name="invitee" ngModel required>
+              <ion-select-option *ngFor="let member of teammember" value='{{member._id}}'>{{member.name}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-label color="danger" *ngIf="invitationValidation.invalid">{{invitationValidation.message}}</ion-label>
+          <ion-label *ngIf="successMessage.success">{{successMessage.message}}</ion-label>
+          <ion-button type="submit" expand="block" color="secondary">Einladen</ion-button>
+        </form>
+      </ion-card-content>
+    </ion-card>
+
+    <!--TODO: <ion-button expand="block" color="secondary">Orgateam verlassen</ion-button>-->
+
+  </div>
+
+  <ion-card *ngIf="isNotLoggedIn">
+    <ion-card-header>
+      <ion-card-title>
+        Du bist nicht eingeloggt!
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-button (click)="openLogin()" expand='block' color='secondary'>
+        <ion-icon name="home"></ion-icon> Zum Login
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

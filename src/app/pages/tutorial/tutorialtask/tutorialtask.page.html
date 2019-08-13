@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Starttutorial: Task (4 von 4)</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-button color='secondary' (click)='nav.navigateForward("tutorialevent")' expand='block'>
+    Einen Schritt zurück!
+  </ion-button>
+
+  <ion-card>
+    <ion-card-header color='light'>
+      <ion-card-title>Was sind Tasks?</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>
+          <p>Task =</p>
+          <p text-wrap>Aufgaben, Planungsschritte, ToDos, welche es zur Planung eines Events zu erledigen gilt</p>
+        </ion-label>
+      </ion-item>
+      <ion-item lines='none'>
+        <ion-card-subtitle>Beispiele: 'Einladung versenden', 'Küche planen', 'Beitrag zahlen', 'Folien erstellen'</ion-card-subtitle>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header color='light'>
+      <ion-card-title>Wie erstellt man Tasks?</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-label>
+        <ul>
+          <li>Erstelle deine Tasks, indem du die Taskliste unten in der Toolbar öffnest und dann auf 'Task erstellen' gehst.</li>
+          <li>Das Symbol für Tasks sieht so aus: <ion-icon name="checkmark"></ion-icon></li>
+        </ul>
+      </ion-label>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header color='light'>
+      <ion-card-title>Besonderheiten: Reminder</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-label>
+        <ul>
+          <li>Anstehende Tasks werden in "dringend" und "offen" unterteilt</li>
+          <li>Ein Task wird "dringend", wenn der Reminder aktiv ist</li>
+          <li>Den Reminder gibt man beim Erstellen des Task an (z.B. x Tage vor Eventbegin)</li>
+          <li>Der Reminder wird immer relativ zum Event angegeben, so dass er für die Templates wiederverwendet werden kann!</li>
+        </ul>
+      </ion-label>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button color='secondary' (click)='nav.navigateForward("")' expand='block'>
+    Ich bin bereit die App zu nutzen!
+  </ion-button>
+</ion-content>
+  

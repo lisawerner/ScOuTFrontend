@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Event erzeugen</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="nav.goBack()">
+        <ion-icon slot="icon-only" name="arrow-round-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="isLoggedIn">
+    <ion-card>
+      <ion-card-header *ngIf='template != null && template != undefined'>
+        <ion-card-title>{{template.name}}</ion-card-title>
+        <ion-card-subtitle>Erstelle ein Event auf Grundlage dieses Templates. Das Template übernimmt Informationen, wie das Team, die Beschreibung und Tasks.</ion-card-subtitle>
+      </ion-card-header>
+      <form #form="ngForm" (ngSubmit)="saveNewEvent(form)">
+        <ion-item>
+          <ion-label position="floating">Event-Name:</ion-label>
+          <ion-input name="eventname" ngModel></ion-input>
+        </ion-item>
+    
+        <ion-item>
+          <ion-label>Team:</ion-label>
+          <ion-select name="teamname" ngModel *ngIf='template == null || template == undefined'>
+            <ion-select-option *ngFor="let team of teams">{{team.name}}</ion-select-option>
+          </ion-select>
+          <ion-label *ngIf='template != null && template != undefined'>{{teamname}}</ion-label>
+        </ion-item>
+    
+        <ion-item>
+          <ion-label>Start:</ion-label>
+          <ion-datetime displayFormat="DD MMM YYYY HH:mm"  [min]="minDate" [max]="maxDate" placeholder="DD MMM YYYY HH:MM" name="eventbegin" ngModel></ion-datetime>
+        </ion-item>
+    
+        <ion-item>
+          <ion-label>Ende:</ion-label>
+          <ion-datetime displayFormat="DD MMM YYYY HH:mm" [min]="minDate" [max]="maxDate" placeholder="DD MMM YYYY HH:MM" name="eventend" ngModel></ion-datetime>
+        </ion-item>
+    
+        <ion-item>
+          <ion-label position="floating">Event Beschreibung (optional):</ion-label>
+          <ion-textarea name="eventdescription" [(ngModel)]="templateDescription"></ion-textarea>
+        </ion-item>
+  
+        <ion-label color="danger">
+          <p *ngIf="validation.invalid">{{validation.message}}</p>
+        </ion-label>
+        <ion-button type="submit" expand="block" color="secondary">Speichern</ion-button>
+      </form>
+    </ion-card>
+  </div>
+
+  <ion-card *ngIf="isNotLoggedIn">
+    <ion-card-header>
+      <ion-card-title>
+        Du bist nicht eingeloggt!
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-button (click)="openLogin()" expand='block' color='secondary'>
+        <ion-icon name="home"></ion-icon> Zum Login
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

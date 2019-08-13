@@ -1,0 +1,43 @@
+<ion-toolbar color="primary" center>
+  <ion-buttons>
+    <ion-grid>
+      <ion-row center>
+        <ion-col text-center>
+          <ion-button (click)="nav.navigateHome()">
+            <ion-icon slot="icon-only" name="home"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col text-center>
+          <ion-button (click)="nav.navigateTasklist()" [disabled]='!back.isLoggedIn'>
+            <ion-icon slot="icon-only" name="checkmark"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col text-center>
+          <ion-button (click)='nav.navigateEventlist()' [disabled]='!back.isLoggedIn'>
+            <ion-icon slot="icon-only" name="calendar"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col text-center>
+          <ion-button (click)='nav.navigateTeamlist()' [disabled]='!back.isLoggedIn'>
+            <ion-icon slot="icon-only" name="contacts"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <!-- Need this space for favButton-->
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-buttons>
+</ion-toolbar>
+
+
+
+  
+<ion-fab vertical="bottom" horizontal="end">
+  <ion-fab-button><ion-icon name="more"></ion-icon></ion-fab-button>
+  <ion-fab-list side="top">
+    <ion-fab-button color='primary' (click)='back.logout()'[disabled]='!back.isLoggedIn'><ion-icon name="log-out"></ion-icon></ion-fab-button>
+    <ion-fab-button color='primary' (click)="nav.navigateForward('accountsettings')" [disabled]='!back.isLoggedIn'><ion-icon name="settings"></ion-icon></ion-fab-button>
+    <ion-fab-button color='primary' (click)="nav.navigateForward('starttutorial')"><ion-icon name="help"></ion-icon></ion-fab-button>
+  </ion-fab-list>
+</ion-fab>

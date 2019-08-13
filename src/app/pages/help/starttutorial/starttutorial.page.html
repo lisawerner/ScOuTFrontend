@@ -1,0 +1,98 @@
+<ion-header>
+<ion-toolbar color="primary">
+  <ion-title>Hilfe: Starttutorial</ion-title>
+  <ion-buttons slot="end">
+    <ion-button (click)="nav.goBack()">
+      <ion-icon slot="icon-only" name="arrow-round-back"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+</ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card>
+    <ion-card-header color='light'>
+      <ion-card-title>Zusammenfassung vom gesamten Starttutorial</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item (click)='nav.navigateForward("tutorialmenu")' detail>
+        Klicke hier, wenn du das Tutorial noch Mal Schritt für Schritt wiederholen willst!
+      </ion-item>
+      <ion-label>Oder schau dir die unten stehende Zusammenfassung an.</ion-label>
+    </ion-card-content>
+  </ion-card>
+  
+  <ion-title>So funktioniert's:</ion-title>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>1. Lege dir Teams an:</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-label>
+        <ul>
+          <li>Ohne Teams kannst du keine Events erstellen</li>
+          <li>Beispiele für Teams: 'Familiengruppe', 'Pfadfinder', 'Chor', 'Arbeit'</li>
+          <li>Das Symbol für Teams sieht so aus: <ion-icon name="contacts"></ion-icon></li>
+          <li>Erstelle deine Teams, indem du die Teamliste unten in dem Menü öffnest und dann auf 'Team erstellen' gehst</li>
+        </ul>
+      </ion-label>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>2. Lege dir Events an:</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-label>
+        <ul>
+          <li>Ohne Events kannst du keine Tasks erstellen</li>
+          <li>Beispiele für Teams: 'Familientreffen', 'Lager', 'Auftritt', 'Präsentation'</li>
+          <li>Das Symbol für Events sieht so aus: <ion-icon name="calendar"></ion-icon></li>
+          <li>Erstelle deine Events, indem du die Eventliste unten in der Toolbar öffnest und dann auf 'Event erstellen' gehst</li>
+          <li>Besonderheit: Man kann Aus Events Templates erstellen, mit welchen man Kopien der Events anlegen kann</li>
+        </ul>
+      </ion-label>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>3. Lege dir Tasks an:</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-label>
+        <ul>
+          <li>Tasks sind Aufgaben, an welche du von dieser App erinnert wirst</li>
+          <li>Beispiele für Task: 'Einladung versenden', 'Küche planen', 'Beitrag zahlen', 'Folien erstellen'</li>
+          <li>Das Symbol für Tasks sieht so aus: <ion-icon name="checkmark"></ion-icon></li>
+          <li>Task, welche du dringend erledigen solltest, werden rot hervorgehoben!</li>
+          <li>Erstelle deine Tasks, indem du die Taskliste unten in der Toolbar öffnest und dann auf 'Task erstellen' gehst.</li>
+          <li>Besonderheit: Reminder-Einstellung unterteilt Task in "dringend" und "offen"</li>
+        </ul>
+      </ion-label>
+    </ion-card-content>
+  </ion-card>
+
+
+
+</ion-content>
+
+<ion-footer color="secondary">
+  <!-- Help-Footer-->
+  <ion-toolbar color="secondary">
+    <ion-buttons>
+      <ion-button (click)="nav.navigateForward('starttutorial')">
+        <ion-icon name="play-circle"></ion-icon> Tutorial
+      </ion-button>
+      <ion-button (click)="nav.navigateForward('sitemap')">
+        <ion-icon name="compass"></ion-icon> Sitemap
+      </ion-button>
+      <ion-button (click)="nav.navigateForward('lexikon')">
+        <ion-icon name="book"></ion-icon> Begriffe
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

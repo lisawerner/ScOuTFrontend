@@ -1,0 +1,15 @@
+ion-app {
+    display:flex;
+    flex-direction: column;
+
+    .main {
+        flex-grow: 1;
+        flex-shrink: 1;
+        position: relative;
+    }
+
+    .footer {
+        flex-grow: 0;
+        flex-shrink: 0;
+    }
+}

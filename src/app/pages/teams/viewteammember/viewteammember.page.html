@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar color="primary">
+  
+    <ion-title *ngIf='isLoggedIn'>{{team.name}}: Teammitglieder</ion-title>
+  
+    <ion-buttons slot="end">
+      <ion-button (click)="nav.goBack()">
+        <ion-icon slot="icon-only" name="arrow-round-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+  
+<ion-content>
+  <div *ngIf="isLoggedIn">
+    <ion-button (click)="nav.navigateForwardParameter('viewteam', team)" color="secondary" expand="block">Zurück zum Team</ion-button>
+    <ion-card>
+      <ion-card-header color='light'>
+        <ion-card-title>Teammitglieder:</ion-card-title>
+      </ion-card-header>
+      <ion-card-content *ngIf='memberlist.memberlist.length > 0'>
+        <ion-list *ngFor='let member of memberlist.memberlist'>
+          <ion-item>{{member.name}}</ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  
+    <ion-card>
+      <ion-card-header color='light'>
+        <ion-card-title>Lade weitere Personen ein:</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-label>{{invitationMessage}}</ion-label>
+          <form #form="ngForm" (ngSubmit)="invite(form)">
+            <ion-item>
+              <ion-label position="floating">Mail-Adresse:</ion-label>
+              <ion-input type="email" name="email" ngModel required></ion-input>
+            </ion-item>
+            
+            <ion-label color="danger">
+              <p *ngIf="validation.invalid">{{validation.message}}</p>
+            </ion-label>
+            <ion-button type="submit" expand="block" color="secondary">Einladen</ion-button>
+          </form>
+      </ion-card-content>
+    </ion-card>
+    
+    <ion-card>
+      <ion-card-header color='light'>
+        <ion-card-title>Eingeladene Personen:</ion-card-title>
+      </ion-card-header>
+      <ion-card-content *ngIf='memberlist.inviteelist.length > 0'>
+          <ion-list *ngFor='let member of memberlist.inviteelist'>
+            <ion-item>{{member.name}}</ion-item>
+          </ion-list>
+      </ion-card-content>
+    </ion-card>
+  
+  </div>
+
+  <ion-card *ngIf="isNotLoggedIn">
+    <ion-card-header>
+      <ion-card-title>
+        Du bist nicht eingeloggt!
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-button (click)="openLogin()" expand='block' color='secondary'>
+        <ion-icon name="home"></ion-icon> Zum Login
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

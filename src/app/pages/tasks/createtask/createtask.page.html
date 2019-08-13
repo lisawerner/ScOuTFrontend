@@ -1,0 +1,95 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Task erzeugen:</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="nav.goBack()">
+        <ion-icon slot="icon-only" name="arrow-round-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div *ngIf="isLoggedIn">
+    <form #form="ngForm" (ngSubmit)="saveNewTask(form)">
+      <ion-card>
+        <ion-card-header color='light'>
+          <ion-card-title>Notwendige Angaben:</ion-card-title>
+        </ion-card-header>
+    
+        <ion-card-content>
+
+          <ion-item>
+            <ion-label position="floating">Task-Name:</ion-label>
+            <ion-input name="taskname" ngModel></ion-input>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label>Team:</ion-label>
+            <ion-select *ngIf='choosedTeam === null' name="teamID" ngModel placeholder="Wähle" (ionChange)='rememberTeam(form.value.teamID)'>
+              <ion-select-option *ngFor="let team of teams" value='{{team._id}}'>{{team.name}}</ion-select-option>
+            </ion-select>
+            <ion-label *ngIf='choosedTeam !== null'>{{choosedTeam.name}}</ion-label>
+          </ion-item>
+      
+          <ion-item [disabled]="teamevents == null">
+            <ion-label>Event:</ion-label>
+            <ion-select *ngIf='choosedEvent === null' name="eventID" ngModel placeholder="Wähle" >
+              <ion-select-option *ngFor="let event of teamevents" value="{{event._id}}">{{event.name}}</ion-select-option>
+            </ion-select>
+            <ion-label *ngIf='choosedEvent !== null'>{{choosedEvent.name}}</ion-label>
+          </ion-item>
+      
+
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title *ngIf="validation.invalid" color="danger">Reminder:</ion-card-title>
+              <ion-card-title *ngIf="!validation.invalid">Reminder:</ion-card-title>
+              <ion-card-subtitle>Wie lange vor dem Event soll dieser Task den Status "dringend erledigen" bekommen, sodass du stärker von der App daran erinnerst wirst ihn zu erledigen:</ion-card-subtitle>
+            </ion-card-header>
+    
+            <ion-card-content>
+              <ion-item>
+                <ion-label>Tage:</ion-label>
+                <ion-input type="number" name="dayreminder" ngModel></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label>Wochen:</ion-label>
+                <ion-input type="number" name="weekreminder" ngModel></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label>Monate:</ion-label>
+                <ion-input type="number" name="monthreminder" ngModel></ion-input>
+              </ion-item>
+            </ion-card-content>
+          </ion-card>
+          
+          <ion-item>
+            <ion-label position="floating">Task Beschreibung (optional):</ion-label>
+            <ion-textarea name="description" ngModel ></ion-textarea>
+          </ion-item>
+
+          <ion-label color="danger">
+            <p *ngIf="validation.invalid">{{validation.message}}</p>
+          </ion-label>
+          <ion-button type="submit" expand="block" color="secondary">Speichern</ion-button>
+        </ion-card-content>
+    
+      </ion-card>
+    </form>
+  </div>
+
+  <ion-card *ngIf="isNotLoggedIn">
+    <ion-card-header>
+      <ion-card-title>
+        Du bist nicht eingeloggt!
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-button (click)="openLogin()" expand='block' color='secondary'>
+        <ion-icon name="home"></ion-icon> Zum Login
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

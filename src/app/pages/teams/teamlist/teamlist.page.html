@@ -1,0 +1,89 @@
+<ion-header>
+<ion-toolbar color="primary">
+  <ion-title>Deine Teams</ion-title>
+
+  <ion-buttons slot="end">
+    <ion-button (click)="nav.goBack()">
+      <ion-icon slot="icon-only" name="arrow-round-back"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+</ion-toolbar>
+</ion-header>
+  
+<ion-content>
+  <div *ngIf='isLoggedIn'>
+    <div *ngIf='invitationTeams !== undefined && teams !== undefined'>
+      <ion-card *ngIf='invitationTeams.length > 0'>
+        <ion-card-header color='light'>
+          <ion-card-title>Ausstehende Team-Einladungen:</ion-card-title>
+          <ion-label>
+            Annahmen mit: <ion-icon name="person-add" slot='icon-only'></ion-icon> //
+            Ablehnen mit: <ion-icon slot='icon-only' name="trash"></ion-icon>
+            <p>(Ablehnen wurde für die Umfrage deaktiviert)</p>
+          </ion-label>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list *ngFor='let invteam of invitationTeams'>
+            <ion-item>
+                <ion-button (click)="acceptInvitation(invteam)" color="secondary"><ion-icon name="person-add" slot='icon-only'></ion-icon></ion-button>
+                <ion-button (click)="declineInvitation(invteam)" color="secondary" disabled><ion-icon slot='icon-only' name="trash"></ion-icon></ion-button>
+                {{invteam.name}}
+            </ion-item>
+          </ion-list>
+
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card *ngIf='teams.length > 0'>
+        <ion-card-content>
+          <ion-list *ngFor="let team of teams">
+            <ion-item (click)="nav.navigateForwardParameter('viewteam', team.team)" detail>
+              <ion-label>
+                {{team.team.name}} (<ion-icon name="calendar"></ion-icon> {{team.events}} Events)
+                <p *ngIf='team.tasksTODO > 0'>
+                  <ion-icon name="checkmark" color='danger'></ion-icon> {{team.tasksTODO}} dringende Tasks
+                </p>
+            </ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card *ngIf='teams.length == 0'>
+        <ion-card-header>
+          <ion-card-title>Du hast aktuell noch keine Teams</ion-card-title>
+        </ion-card-header>
+      </ion-card>
+
+      <ion-card *ngIf='invitationTeams.length == 0'>
+          <ion-card-header color='light'>
+            <ion-card-title>Ausstehende Team-Einladungen:</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-label>Aktuell keine!</ion-label>
+          </ion-card-content>
+        </ion-card>
+    </div>
+  </div>
+
+  <ion-card *ngIf="isNotLoggedIn">
+    <ion-card-header>
+      <ion-card-title>
+        Du bist nicht eingeloggt!
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-button (click)="openLogin()" expand='block' color='secondary'>
+        <ion-icon name="home"></ion-icon> Zum Login
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-footer *ngIf="isLoggedIn">
+  <ion-toolbar color="secondary">
+    <div (click)="nav.navigateForward('createteam')" color='secondary' text-center>
+        <ion-icon name="contacts"></ion-icon><ion-icon name="add"></ion-icon> Team erstellen
+    </div>
+  </ion-toolbar>
+</ion-footer>

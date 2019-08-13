@@ -1,0 +1,100 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title *ngIf='isLoggedIn && task != undefined'>Task: {{task.name}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="nav.goBack()">
+        <ion-icon slot="icon-only" name="arrow-round-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf='isLoggedIn && task != undefined'>
+    <ion-card>
+      <ion-card-header color='light'>
+        <ion-card-title background-color='light'>Erledigungsstatus:</ion-card-title>
+        
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label *ngIf='task.done'>Erledigt</ion-label>
+          <ion-label *ngIf='!task.done'>Unerledigt</ion-label>
+          <ion-toggle [(ngModel)]="toggleDoneValue" (ionChange)='changeDone()' checked="{{task.done == true}}"></ion-toggle>
+          <ion-card-subtitle *ngIf='statusChanged' color='danger'>{{statusChangedMessage}}</ion-card-subtitle>
+        </ion-item>
+        <ion-label *ngIf='!active && !task.done'>
+          <h2>Reminder: startet ca. {{reminderToString}} vor dem Eventbegin</h2>
+        </ion-label>
+        <ion-label *ngIf='active && !task.done' color="danger">
+          <h2>Reminder: Du solltest das jetzt erledigen!</h2>
+        </ion-label>
+        <ion-label *ngIf='task.done'>
+          <h2>Reminder: Dieser Task ist bereits erledigt!</h2>
+        </ion-label>
+      </ion-card-content>
+    </ion-card>
+    
+    <ion-card *ngIf='myTeam !== undefined && myEvent !== undefined'>
+      <ion-card-header color='light'>
+        <ion-card-title>Infos zu dem Task:</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label text-wrap>
+            <h2>Beschreibung:</h2>
+            <p>{{task.description}}</p>
+            <p *ngIf='task.description == ""'> ---</p>     
+          </ion-label>
+        </ion-item>
+        <ion-item (click)="nav.navigateForwardParameter('viewteam', myTeam)" detail>
+          Team: {{myTeam.name}}
+        </ion-item>
+        <ion-item (click)="nav.navigateForwardParameter('viewevent', myEvent)" detail>
+          <ion-label>
+            <h2>Event: {{myEvent.name}}</h2>
+            <p>startet am {{myEvent.begindate}}</p>
+          </ion-label>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+    
+    <ion-card>
+      <ion-card-header color='light'>
+        <ion-card-title>Notizfeld:</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <form #form="ngForm" (ngSubmit)="changeTask(form)">
+          <ion-textarea name="noticefield" [(ngModel)]="task.notice">
+            
+          </ion-textarea>
+          <ion-label color='danger' *ngIf='saveNotes'>Deine Notizen wurden gespeichert!</ion-label>
+          <ion-button type="submit" expand="block" color="secondary">Notizen Speichern</ion-button>
+        </form>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  
+  <ion-card *ngIf="isNotLoggedIn">
+    <ion-card-header>
+      <ion-card-title>
+        Du bist nicht eingeloggt!
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-button (click)="openLogin()" expand='block' color='secondary'>
+        <ion-icon name="home"></ion-icon> Zum Login
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
+<!--
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-button (click)="nav.navigateForwardParameter('viewteam', myTeam)"><ion-icon slot="icon-only" name="contacts"></ion-icon></ion-button>
+      <ion-button (click)="nav.navigateForwardParameter('viewevent', myEvent)"><ion-icon slot="icon-only" name="calendar"></ion-icon></ion-button>
+      <ion-button (click)="showConfirmAlert()"><ion-icon slot="icon-only" name="trash"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+-->

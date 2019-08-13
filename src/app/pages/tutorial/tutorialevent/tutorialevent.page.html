@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Starttutorial: Event (3 von 4)</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-button color='secondary' (click)='nav.navigateForward("tutorialteam")' expand='block'>
+    Einen Schritt zurück!
+  </ion-button>
+
+  <ion-card>
+    <ion-card-header color='light'>
+      <ion-card-title>Was sind Events?</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>
+          <p>Event =</p>
+          <p text-wrap>Aktionen, Veranstaltungen oder andere Termine, welche du in einer Gruppe planst</p>
+        </ion-label>
+      </ion-item>
+      <ion-item lines='none'>
+        <ion-card-subtitle>Beispiele: 'Familientreffen', 'Lager', 'Auftritt', 'Präsentation'</ion-card-subtitle>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header color='light'>
+      <ion-card-title>Wofür braucht man Events?</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-label color='danger'>Ohne Events kannst du keine Tasks erstellen!</ion-label>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header color='light'>
+      <ion-card-title>Wie erstellt man Events?</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-label>
+        <ul>
+          <li>Erstelle deine Events, indem du die Eventliste unten in dem Menü öffnest und dann auf 'Event erstellen' gehst</li>
+          <li>Das Symbol für Events sieht so aus: <ion-icon name="calendar"></ion-icon></li>
+        </ul>
+      </ion-label>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header color='light'>
+      <ion-card-title>Besonderheit: Template</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-label>
+        <ul>
+          <li>Man kann aus Events Templates erstellen</li>
+          <li>Templates speichern die Struktur des Events + alle Tasks</li>
+          <li>Will man ein ähnliches Event erstellen, kann man sich Arbeit unt Zeit sparen und das Event auf Grundlage des Templates erstellen</li>
+        </ul>
+      </ion-label>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button color='secondary' (click)='nav.navigateForward("tutorialtask")' expand='block'>
+    Verstanden! Weiter
+  </ion-button>
+</ion-content>

@@ -1,0 +1,181 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Hilfe: Sitemap</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="nav.goBack()">
+        <ion-icon slot="icon-only" name="arrow-round-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card>
+    <ion-card-header color='light'>
+      <ion-card-title>App-Seiten: Team</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item (click)="nav.navigateForward('teamlist')" detail>
+          <ion-label>Übersicht: Teams</ion-label>
+        </ion-item>
+        <ion-item (click)="nav.navigateForward('createteam')" detail>
+          <ion-label>Team erstellen</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-label>Teamseite</ion-label>
+            </ion-row>
+            <ion-row>
+              <ion-card-subtitle>
+                Öffne ein Team, indem du z.B. auf die Teamliste gehst und dort ein konkretes Team auswählst
+              </ion-card-subtitle>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+        <ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-label>Teammitglieder</ion-label>
+            </ion-row>
+            <ion-row>
+              <ion-card-subtitle>
+                Öffne die Teamseite ein konkretes Team und gehe von dort in die Mitgliederliste
+              </ion-card-subtitle>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header color='light'>
+      <ion-card-title>App-Seiten: Event</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item (click)="nav.navigateForward('eventlist')" detail>
+          <ion-label>Übersicht: Events</ion-label>
+        </ion-item>
+        <ion-item (click)="nav.navigateForward('createeventchooser')" detail>
+          <ion-label>Event erstellen</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-label>Eventseite</ion-label>
+            </ion-row>
+            <ion-row>
+              <ion-card-subtitle>
+                Öffne ein Event, indem du z.B. auf die Eventliste gehst und dort ein konkretes Events auswählst
+              </ion-card-subtitle>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+        <ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-label>Orgateam</ion-label>
+            </ion-row>
+            <ion-row>
+              <ion-card-subtitle>
+                Öffne ein die Eventseite eines konkreten Event und von dort aus das Orgateam
+              </ion-card-subtitle>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header color='light'>
+      <ion-card-title>App-Seiten: Task</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item (click)="nav.navigateForward('tasklist')" detail>
+          <ion-label>Taskliste</ion-label>
+        </ion-item>
+        <ion-item (click)="nav.navigateForward('createtask')" detail>
+          <ion-label>Task erstellen</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-label>Taskseite</ion-label>
+            </ion-row>
+            <ion-row>
+              <ion-card-subtitle>
+                Öffne ein Task, indem du z.B. auf die Taskliste gehst und einen konkreten Task auswählst
+              </ion-card-subtitle>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header color='light'>
+      <ion-card-title>Weitere App-Seiten</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item (click)="nav.navigateForward('home')" detail>
+          <ion-label>Startseite</ion-label>
+        </ion-item>
+        <ion-item (click)="nav.navigateForward('login')" detail>
+          <ion-label>Login</ion-label>
+        </ion-item>
+        <ion-item (click)="nav.navigateForward('register')" detail>
+          <ion-label>Registrierung</ion-label>
+        </ion-item>
+        <ion-item (click)="nav.navigateForward('starttutorial')" detail>
+          <ion-label>Hilfe: Starttutorial</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-label>Hilfe: Sitemap</ion-label>
+            </ion-row>
+            <ion-row>
+              <ion-card-subtitle>
+                Hier befindest du dich gerade.
+              </ion-card-subtitle>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+        <ion-item (click)="nav.navigateForward('starttutorial')" detail>
+          <ion-label>Hilfe: Begriffe</ion-label>
+        </ion-item>
+        <ion-item (click)="nav.navigateForward('accountsettings')" detail>
+          <ion-label>Settings: Account</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
+
+
+<ion-footer color="secondary">
+  <!-- Help-Footer-->
+  <ion-toolbar color="secondary">
+    <ion-buttons>
+      <ion-button (click)="nav.navigateForward('starttutorial')">
+        <ion-icon name="play-circle"></ion-icon> Tutorial
+      </ion-button>
+      <ion-button (click)="nav.navigateForward('sitemap')">
+        <ion-icon name="compass"></ion-icon> Sitemap
+      </ion-button>
+      <ion-button (click)="nav.navigateForward('lexikon')">
+        <ion-icon name="book"></ion-icon> Begriffe
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

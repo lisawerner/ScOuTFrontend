@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar color="primary">
+
+    <ion-title>Login</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="goBack()" disabled>
+        <ion-icon slot="icon-only" name="arrow-round-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        Gib deine Login-Daten ein:
+      </ion-card-title>
+    </ion-card-header>
+    
+    <ion-card-content>
+      <form #form="ngForm" (ngSubmit)="login(form)">
+      
+      <ion-item>
+        <ion-label position="floating">Mail-Adresse:</ion-label>
+        <ion-input type="email" name="email" ngModel required></ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label position="floating">Passwort:</ion-label>
+        <ion-input type="password" name="password" ngModel required></ion-input>
+      </ion-item>
+      
+      <ion-label color="danger">
+        <p *ngIf="validation.invalid">{{validation.message}}</p>
+      </ion-label>
+      <ion-button type="submit" expand="block" color="secondary">Anmelden</ion-button>
+    </form>
+    </ion-card-content>
+  </ion-card>
+  
+  <ion-card>
+    <ion-card-content>
+      <ion-label>Du hast noch keinen Account?</ion-label>
+      <ion-button expand="block" (click)="nav.navigateForward('register')" color="secondary">Weiter zur Registrierung</ion-button>    
+    </ion-card-content>
+  </ion-card>
+</ion-content>

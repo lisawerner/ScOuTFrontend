@@ -1,0 +1,104 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title *ngIf='isLoggedIn && event != undefined && team != undefined'>Event: {{event.name}}</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="nav.goBack()">
+        <ion-icon slot="icon-only" name="arrow-round-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div *ngIf="isLoggedIn">
+      <ion-card *ngIf='event != undefined'>
+        <ion-card-header color='light'>
+          <ion-card-title>Von: {{event.begindate}} {{event.begintime}} Uhr</ion-card-title>
+          <ion-card-title>Bis: {{event.enddate}} {{event.endtime}} Uhr</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-card-subtitle>Beschreibung: {{event.description}}</ion-card-subtitle>
+
+
+          <ion-button (click)="nav.navigateForwardParameter('viewteam', team)" expand='block' color='secondary' *ngIf='team != undefined'><ion-icon name="contacts"></ion-icon> {{team.name}}</ion-button>
+          <ion-button (click)="nav.navigateForwardParameter('orgateam', event)" expand='block' color='secondary'>Zum Orgateam</ion-button>
+        </ion-card-content>
+      </ion-card>
+    
+      <ion-card>
+        <ion-card-header color='light'>
+            <ion-card-title>Event Tasks:</ion-card-title>
+        </ion-card-header>
+        <ion-card-content *ngIf='tasksTODO != undefined'>
+
+          <ion-label *ngIf='tasksTODO.length === 0'>
+            Aktuell gibt es keine dringenden Tasks!
+          </ion-label>
+
+          <div *ngIf='tasksTODO.length > 0'>
+            <ion-label color='danger'>Dringende Tasks:</ion-label>
+            <ion-label><p>Diese Task solltest du möglichst bald erledigen!</p></ion-label>
+            <ion-list *ngFor='let task of tasksTODO'>
+              <ion-item *ngIf='!task.done' (click)="nav.navigateForwardParameter('viewtask', task)" detail  lines='none'>
+                <ion-icon name="checkmark" color='danger'></ion-icon> {{task.name}}
+              </ion-item>
+            </ion-list>
+          </div>
+
+          <div *ngIf='tasksTODO.length === 0 && tasksFUTURE.length > 0'>
+            <ion-label>Offene Tasks:</ion-label>
+            <ion-list *ngFor='let task of tasksFUTURE'>
+              <ion-item *ngIf='!task.done' (click)="nav.navigateForwardParameter('viewtask', task)" detail  lines='none'>
+                <ion-icon name="checkmark"></ion-icon> {{task.name}}
+              </ion-item>
+            </ion-list>
+          </div>
+          
+          <ion-button (click)="nav.navigateForwardParameter('eventtasks', event)" expand='block' color='secondary'>
+            <ion-icon name='checkmark-circle'></ion-icon>Alle Event Tasks
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-header color='light'>
+          <ion-card-title>Erstelle ein Template...</ion-card-title>
+          <ion-card-subtitle>... welches Struktur und Task wiederverwendbar macht!</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <!--TODO: Wenn es bereits ein Tempalte für das Event gibt, dann sollte man es nicht mehr erstellen,
+            sondern höchstens bearbeiten können!
+            Damit man Prüfen kann, ob es schon ein Template gibt:
+              Muss irgendeine ID/Referenz zwischen dem Template und seinen Ablegern erstellt werden-->
+          <form #form="ngForm" (ngSubmit)="createTemplate(form)">
+            
+            <ion-item>
+              <ion-label position="floating">Template-Name:</ion-label>
+              <ion-input name="templatename" ngModel required></ion-input>
+            </ion-item>
+            <ion-label color="danger">
+              <p *ngIf="templateValidation.invalid">{{templateValidation.message}}</p>
+            </ion-label>
+            <ion-label *ngIf="success">Das Template wurde erfolreich angelegt.</ion-label>
+            <ion-button type="submit" expand="block" color="secondary">Template erstellen</ion-button>
+
+          </form>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <ion-card *ngIf="isNotLoggedIn">
+      <ion-card-header>
+        <ion-card-title>
+          Du bist nicht eingeloggt!
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-button (click)="openLogin()" expand='block' color='secondary'>
+          <ion-icon name="home"></ion-icon> Zum Login
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+
+</ion-content>

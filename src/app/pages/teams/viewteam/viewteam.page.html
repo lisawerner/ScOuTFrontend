@@ -1,0 +1,93 @@
+<ion-header>
+  <ion-toolbar color="primary">  
+    <ion-title *ngIf='isLoggedIn'>Team: {{team.name}}</ion-title>
+  
+    <ion-buttons slot="end">
+      <ion-button (click)="nav.goBack()">
+        <ion-icon slot="icon-only" name="arrow-round-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+  
+<ion-content>
+
+  <div *ngIf="isLoggedIn">
+    <ion-card *ngIf='team != undefined && myEvents != undefined'>
+      <ion-card-header color='light'>
+        <ion-card-title>Team-Infos:</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item (click)="nav.navigateForwardParameter('viewteammember', team)" detail>
+          <ion-button  expand="block" color="secondary">
+            <ion-icon name="contacts"></ion-icon>{{team.members.length}} Teammitglieder
+          </ion-button>
+        </ion-item>
+        <ion-item (click)="nav.navigateForwardParameter('eventlist', team)" detail>
+          <ion-button  expand="block" color="secondary">
+            <ion-icon name="calendar"></ion-icon>{{myEvents.length}} Events
+          </ion-button>
+        </ion-item>
+        <ion-item (click)="nav.navigateForwardParameter('tasklist', {team: team, event: null})" detail *ngIf='myTasksLength != undefined'>
+          <ion-button  expand="block" color="danger" *ngIf='myTasksLength > 0'>
+            <ion-icon name="checkmark"></ion-icon>{{myTasksLength}} dringende Tasks</ion-button>
+          <ion-button  expand="block" color="secondary" *ngIf='myTasksLength == 0'>
+            <ion-icon name="checkmark"></ion-icon>{{myTasksLength}} dringende Task</ion-button>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+  
+    <div *ngIf='myEvents != undefined'>
+      <ion-card>
+        <ion-card-header color='light'>
+          <ion-card-title>Team-Events:</ion-card-title>
+          <ion-card-subtitle *ngIf='myEvents.length > 0'>Hier bist du ein Orgamitglied!</ion-card-subtitle>
+          <ion-card-subtitle *ngIf='myEvents.length == 0'>Du bist aktuell nirgends ein Orgamitglied!</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list *ngFor="let event of myEvents">
+            <ion-item (click)="nav.navigateForwardParameter('viewevent', event.event)" detail>
+              <ion-label>
+                {{event.event.name}}
+                <p *ngIf='event.tasksLength > 0'>
+                  <ion-icon name="checkmark" color='danger'></ion-icon> {{event.tasksLength}} dringende Tasks
+                </p>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <div *ngIf='myPastEvents != undefined'>
+      <ion-card *ngIf='myPastEvents.length > 0'>
+        <ion-card-header color='light'>
+          <ion-card-title>Vergangene Team-Events:</ion-card-title>
+          <ion-card-subtitle>Du hattest in deinem Team schon folgende Events plant:
+            <p>(Tipp: Erstelle aus den Events Templates, dann kannst du sie bedenkenlos löschen.)</p>
+          </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list *ngFor="let event of myPastEvents">
+            <ion-item (click)="nav.navigateForwardParameter('viewevent', event)" lines='none' detail>
+              <ion-label>{{event.name}}</ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+  
+  <ion-card *ngIf="isNotLoggedIn">
+    <ion-card-header>
+      <ion-card-title>
+        Du bist nicht eingeloggt!
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-button (click)="openLogin()" expand='block' color='secondary'>
+        <ion-icon name="home"></ion-icon> Zum Login
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

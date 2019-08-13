@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Starttutorial: Teams (2 von 4)</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-button color='secondary' (click)='nav.navigateForward("tutorialmenu")' expand='block'>
+    Einen Schritt zurück!
+  </ion-button>
+
+  <ion-card>
+    <ion-card-header color='light'>
+      <ion-card-title>Was sind Teams?</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>
+          <p>Teams =</p>
+          <p text-wrap>Gruppen, Vereine oder andere Zusammesnchlüsse von Personen</p>
+        </ion-label>
+      </ion-item>
+      <ion-item lines='none'>
+        <ion-card-subtitle>Beispiele: 'Familiengruppe', 'Pfadfinder', 'Chor', 'Arbeit'</ion-card-subtitle>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header color='light'>
+      <ion-card-title>Wofür braucht man Teams?</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-label color='danger'>Ohne Teams kannst du keine Events erstellen!</ion-label>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header color='light'>
+      <ion-card-title>Wie erstellt man Teams?</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-label>
+        <ul>
+          <li>Erstelle deine Teams, indem du die Teamliste unten in dem Menü öffnest und dann auf 'Team erstellen' gehst</li>
+          <li>Das Symbol für Teams sieht so aus: <ion-icon name="contacts"></ion-icon></li>
+        </ul>
+      </ion-label>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button color='secondary' (click)='nav.navigateForward("tutorialevent")' expand='block'>
+    Verstanden! Weiter
+  </ion-button>
+</ion-content>

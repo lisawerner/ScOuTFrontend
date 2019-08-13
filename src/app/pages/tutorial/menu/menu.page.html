@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Starttutorial: Menu (1 von 4)</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header color='light'>
+      <ion-card-title>Das Menü</ion-card-title>
+      <ion-card-subtitle>Siehe ganz unten</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-label>
+        <ul>
+          <li>Die Startseite erreichst du über: <ion-icon name="home"></ion-icon></li>
+          <li>Die Task-Übersicht erreichst du über: <ion-icon name="checkmark"></ion-icon></li>
+          <li>Die Event-Übersicht erreichst du über: <ion-icon name="calendar"></ion-icon></li>
+          <li>Die Team-Übersicht erreichst du über: <ion-icon name="contacts"></ion-icon></li>
+        </ul>
+      </ion-label>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header color='light'>
+      <ion-card-title>Das weiterführende Menü</ion-card-title>
+      <ion-card-subtitle>Siehe ganz unten rechts</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-label>
+        Das weiterführende Menu erreichst du über: <ion-icon name="more"></ion-icon>
+      </ion-label>
+      <ion-label color='danger'>Hier ist auch die Hilfe-Funktion, wo du jeder Zeit das ganze Tutorial erneut machen kannst!</ion-label>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button color='secondary' (click)='nav.navigateForward("tutorialteam")' expand='block'>
+    Verstanden! Weiter
+  </ion-button>
+</ion-content>

@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="openSidemenu()" disabled>
+        <ion-icon slot="icon-only" name="menu"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>Registrierung</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="goBack()" disabled>
+        <ion-icon slot="icon-only" name="arrow-round-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card>
+    
+    <ion-card-content>
+      <form #form="ngForm" (ngSubmit)="register(form)">
+      <ion-item>
+        <ion-label position="floating">Anzeigename:</ion-label>
+        <ion-input name="name" ngModel required placeholder='Wird anderen Nutzern angezeigt' maxlength='32' type='text'></ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label position="floating">Mail-Adresse:</ion-label>
+        <ion-input type="email" name="email" ngModel required placeholder='Login-Kennung'></ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label position="stacked">Passwort:</ion-label>
+        <ion-input type="password" name="password" ngModel required></ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label position="stacked">Passwort wiederholen:</ion-label>
+        <ion-input type="password" name="confirm" ngModel required></ion-input>
+      </ion-item>
+      
+      <!-- TODO:
+        Hier muss noch ein Captcha hin! :D
+        Hier muss noch ein Zustimmen der Datenschutzerklärung hin! :D
+        Hier muss ein Bestätigen der AGB hin! :D -->
+      <ion-label color="danger">
+        <p *ngIf="validation.invalid">{{validation.message}}</p>
+      </ion-label>
+        <ion-button type="submit" expand="block" color="secondary">Registrieren</ion-button>
+    </form>
+    </ion-card-content>
+  </ion-card>
+  
+  <ion-card>
+    <ion-card-content>
+      <ion-label>Du hast bereits einen Account?</ion-label>
+      <ion-button expand="block" (click)="nav.navigateLogin('home')" color="secondary">Weiter zum Login</ion-button>    
+    </ion-card-content>
+  </ion-card>
+</ion-content>
