@@ -28,14 +28,10 @@
         </ion-card-header>
         <ion-list *ngFor='let task of tasksTODO'>
           <ion-item (click)="nav.navigateForwardParameter('viewtask', task.task)" detail *ngIf='!task.task.done'>
-            <ion-grid>
-              <ion-row>
-                <ion-label color='danger'><h2><ion-icon name="checkmark" color='danger'></ion-icon> {{task.task.name}}</h2></ion-label>
-              </ion-row>
-              <ion-row>
-                <ion-card-subtitle>{{task.team.name}} &rarr; {{task.event.name}}</ion-card-subtitle>
-              </ion-row>
-            </ion-grid>
+            <ion-label>
+              <ion-label color='danger'><h2><ion-icon name="checkmark" color='danger'></ion-icon> {{task.task.name}}</h2></ion-label>
+              <ion-card-subtitle>{{task.team.name}} &rarr; {{task.event.name}}</ion-card-subtitle>
+            </ion-label>
           </ion-item>
         </ion-list>
       </ion-card>
@@ -47,14 +43,10 @@
         </ion-card-header>
         <ion-list *ngFor='let task of tasksFUTURE'>
           <ion-item (click)="nav.navigateForwardParameter('viewtask', task.task)" detail>
-            <ion-grid>
-              <ion-row>
-                  <ion-label><h2><ion-icon name="checkmark"></ion-icon> {{task.task.name}}</h2></ion-label>
-              </ion-row>
-              <ion-row>
-                <ion-card-subtitle>{{task.team.name}} &rarr; {{task.event.name}}</ion-card-subtitle>
-              </ion-row>
-            </ion-grid>
+            <ion-label>
+              <ion-label><h2><ion-icon name="checkmark"></ion-icon> {{task.task.name}}</h2></ion-label>
+              <ion-card-subtitle>{{task.team.name}} &rarr; {{task.event.name}}</ion-card-subtitle>
+            </ion-label>
           </ion-item>
         </ion-list>
       </ion-card>

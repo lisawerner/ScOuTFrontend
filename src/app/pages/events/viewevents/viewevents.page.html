@@ -18,11 +18,26 @@
           <ion-card-title>Bis: {{event.enddate}} {{event.endtime}} Uhr</ion-card-title>
         </ion-card-header>
         <ion-card-content>
-          <ion-card-subtitle>Beschreibung: {{event.description}}</ion-card-subtitle>
-
-
-          <ion-button (click)="nav.navigateForwardParameter('viewteam', team)" expand='block' color='secondary' *ngIf='team != undefined'><ion-icon name="contacts"></ion-icon> {{team.name}}</ion-button>
-          <ion-button (click)="nav.navigateForwardParameter('orgateam', event)" expand='block' color='secondary'>Zum Orgateam</ion-button>
+          <ion-list>
+            <!--TODO: Hier ein item einfügen, welches Ansagt "Das Event ist bereits vorbei", sofern das Event vorbei ist :D -->
+            <ion-item>
+              Beschreibung:
+              <ion-card-subtitle *ngIf='event.description !== ""'>{{event.description}}</ion-card-subtitle>
+              <ion-card-subtitle *ngIf='event.description === ""'>---</ion-card-subtitle>
+            </ion-item>
+            <ion-item (click)="nav.navigateForwardParameter('viewteam', team)" *ngIf='team !== undefined' detail>
+              <ion-button color='secondary'><ion-icon name="contacts" slot="icon-only"></ion-icon></ion-button> Team: {{team.name}}
+            </ion-item>
+            <ion-item (click)="nav.navigateForwardParameter('orgateam', event)" detail *ngIf='event !== undefined'>
+              <ion-button color='secondary'><ion-icon name="people" slot="icon-only"></ion-icon></ion-button> {{event.members.length}} Orgateam-Mitglieder
+            </ion-item>
+            <ion-item (click)="nav.navigateForwardParameter('tasklist', {team: null, event: event})" detail *ngIf='tasksTODO !== undefined && tasksFUTURE !== undefined'>
+                <ion-label>
+                  <p><ion-icon color="danger" name="checkmark"></ion-icon> {{tasksTODO.length}} dringende Tasks</p>
+                  <p><ion-icon color="medium" name="checkmark"></ion-icon> {{tasksFUTURE.length}} offene Tasks</p>
+                </ion-label>
+            </ion-item>
+          </ion-list>
         </ion-card-content>
       </ion-card>
     
@@ -56,7 +71,7 @@
           </div>
           
           <ion-button (click)="nav.navigateForwardParameter('eventtasks', event)" expand='block' color='secondary'>
-            <ion-icon name='checkmark-circle'></ion-icon>Alle Event Tasks
+            <ion-icon name='checkmark'></ion-icon> Zeige alle Event Tasks
           </ion-button>
         </ion-card-content>
       </ion-card>

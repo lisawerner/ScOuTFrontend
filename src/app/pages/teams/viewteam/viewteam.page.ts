@@ -15,7 +15,8 @@ export class ViewteamPage implements OnInit {
   myEvents: any = [];
   myPastEvents: any;
 
-  myTasksLength: number;
+  myTODOTasksLength: number;
+  myFUTURETasksLength: number;
 
   constructor(private nav: NavigatorService, private back: BackendService, private reminder: ReminderService) {  }
 
@@ -31,7 +32,8 @@ export class ViewteamPage implements OnInit {
       this.myEvents = []
       this.myPastEvents = [];
       const events = await this.back.getEvents(this.team._id, '', true);
-      this.myTasksLength = 0;
+      this.myTODOTasksLength = 0;
+      this.myFUTURETasksLength = 0;
       for(let event of events){
         if(this.reminder.isPast(event)){
           this.myPastEvents.push(event);
@@ -39,14 +41,18 @@ export class ViewteamPage implements OnInit {
           if(event.members.includes(this.back.myID)){
             const allTasks = await this.back.getTasks(event._id, '');
             let activeLength = 0;
+            let futureLength = 0;
             for(const task of allTasks){
               if(!task.done){
                 if(this.reminder.isActive(event, task)){
                   activeLength++;
+                } else {
+                  futureLength++;
                 }
               }
             }
-            this.myTasksLength = this.myTasksLength + activeLength;
+            this.myTODOTasksLength = this.myTODOTasksLength + activeLength;
+            this.myFUTURETasksLength = this.myFUTURETasksLength + futureLength;
             this.myEvents.push({event: event, tasksLength: activeLength});
           }
         }

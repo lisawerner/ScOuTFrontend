@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
   
-    <ion-title *ngIf='isLoggedIn'>{{team.name}}: Teammitglieder</ion-title>
+    <ion-title *ngIf='isLoggedIn && team !== undefined'>Team: {{team.name}}</ion-title>
   
     <ion-buttons slot="end">
       <ion-button (click)="nav.goBack()">
