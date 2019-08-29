@@ -25,24 +25,22 @@
         <ion-card-title>Anstehende Events:</ion-card-title>
       </ion-card-header>
       <ion-list *ngFor='let event of events'>
-        <ion-item>
-          <ion-item (click)="nav.navigateForwardParameter('viewevent', event.event)" detail  lines='none'>
-            <ion-label><h2>{{event.event.name}}</h2>
-              <ion-grid>
-                <ion-row>
-                  <ion-col>
-                    <p *ngIf='event.begindate == event.enddate'>{{event.event.begindate}}</p>
-                    <p *ngIf='event.begindate != event.enddate'>{{event.event.begindate}} bis {{event.event.enddate}}</p>
-                    <p>Team: {{event.team.name}}</p>
-                  </ion-col>
-                  <ion-col>
-                    <p><ion-icon name="checkmark" color="danger"></ion-icon>{{event.tasks.length}} Tasks</p>
-                    <p><ion-icon name="checkmark" color="medium"></ion-icon>{{event.futureTasks.length}} Tasks</p>
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
-            </ion-label>
-          </ion-item>
+        <ion-item (click)="nav.navigateForwardParameter('viewevent', event.event)" detail>
+          <ion-label><h2>{{event.event.name}}</h2>
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <p *ngIf='event.event.begindate === event.event.enddate'>{{event.event.begindate}}</p>
+                  <p *ngIf='event.event.begindate !== event.event.enddate'>{{event.event.begindate}} bis {{event.event.enddate}}</p>
+                  <p>Team: {{event.team.name}}</p>
+                </ion-col>
+                <ion-col>
+                  <p><ion-icon name="checkmark" color="danger"></ion-icon>{{event.tasks.length}} Tasks</p>
+                  <p><ion-icon name="checkmark" color="medium"></ion-icon>{{event.futureTasks.length}} Tasks</p>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-label>
         </ion-item>
       </ion-list>
     </ion-card>

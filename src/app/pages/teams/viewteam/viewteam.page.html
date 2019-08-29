@@ -19,20 +19,17 @@
       </ion-card-header>
       <ion-card-content>
         <ion-item (click)="nav.navigateForwardParameter('viewteammember', team)" detail>
-          <ion-button  expand="block" color="secondary">
-            <ion-icon name="contacts"></ion-icon>{{team.members.length}} Teammitglieder
-          </ion-button>
+          <ion-button color="secondary"><ion-icon name="contacts" slot="icon-only"></ion-icon></ion-button>
+            {{team.members.length}} Teammitglieder
         </ion-item>
         <ion-item (click)="nav.navigateForwardParameter('eventlist', team)" detail>
-          <ion-button  expand="block" color="secondary">
-            <ion-icon name="calendar"></ion-icon>{{myEvents.length}} Events
-          </ion-button>
+            <ion-button color="secondary"><ion-icon name="calendar" slot="icon-only"></ion-icon></ion-button>{{myEvents.length}} Events
         </ion-item>
-        <ion-item (click)="nav.navigateForwardParameter('tasklist', {team: team, event: null})" detail *ngIf='myTasksLength != undefined'>
-          <ion-button  expand="block" color="danger" *ngIf='myTasksLength > 0'>
-            <ion-icon name="checkmark"></ion-icon>{{myTasksLength}} dringende Tasks</ion-button>
-          <ion-button  expand="block" color="secondary" *ngIf='myTasksLength == 0'>
-            <ion-icon name="checkmark"></ion-icon>{{myTasksLength}} dringende Task</ion-button>
+        <ion-item (click)="nav.navigateForwardParameter('tasklist', {team: team, event: null})" detail *ngIf='myTODOTasksLength != undefined && myFUTURETasksLength != undefined'>
+            <ion-label>
+              <p><ion-icon color="danger" name="checkmark"></ion-icon> {{myTODOTasksLength}} dringende Tasks</p>
+              <p><ion-icon color="medium" name="checkmark"></ion-icon> {{myFUTURETasksLength}} offene Tasks</p>
+            </ion-label>
         </ion-item>
       </ion-card-content>
     </ion-card>
